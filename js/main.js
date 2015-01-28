@@ -11,11 +11,11 @@ var canvas = canvasElement.get(0).getContext("2d");
 var FPS = 30;
 var paused = false;
 $(document).ready(function(){
-	canvasElement.appendTo('#canvas_container'); // create canvas in body
-	setInterval(function() {
-		update();
-		draw();
-	}, 1000/FPS); // set FPS 
+  canvasElement.appendTo('#canvas_container'); // create canvas in body
+  setInterval(function() {
+    update();
+    draw();
+  }, 1000/FPS); // set FPS 
 });
 // var period = 20;
 var period = 3;
@@ -27,6 +27,7 @@ var currentDirection;
 var timer = period;
 var bodies = new Array();
 var swipeDirection;
+var ratio = 50;
 function move(){
   $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
@@ -73,16 +74,16 @@ function move(){
   // move accordingly
   if (timer==0) {
       for (var i=bodyNum; i>0;i--) {
-//   	  	if (i==0) {
-//   	  	  bodies[i] = new body(head.x-UNIT/2, head.y-UNIT/2);
-//   	  	} else {
-   		  bodies[i] = new body(bodies[i-1].x,bodies[i-1].y);
-//   		}
-  	  }
-  	  bodies[0] = new body(head.x-UNIT/2, head.y-UNIT/2);
+//        if (i==0) {
+//          bodies[i] = new body(head.x-UNIT/2, head.y-UNIT/2);
+//        } else {
+        bodies[i] = new body(bodies[i-1].x,bodies[i-1].y);
+//      }
+      }
+      bodies[0] = new body(head.x-UNIT/2, head.y-UNIT/2);
   
-  	timer = period;
-//   	body(head.x - UNIT/2, head.y - UNIT/2);
+    timer = period;
+//    body(head.x - UNIT/2, head.y - UNIT/2);
 
     if (!paused) {
       if (moveLeft) {
@@ -122,10 +123,10 @@ var bodyNum = 0;
 var got = false;
 function checkGot() {
   if (food.x == head.x && food.y == head.y) {
-  	got = true;
+    got = true;
   }
   if (got) {
-    score++;
+    score += ratio;
     onEatAudio.play();
     if (score >= bestScore) {
       bestScore = score;
@@ -137,14 +138,14 @@ function checkGot() {
     while (recheck == true) {
       recheck = false;
       console.log(recheck)
-	  for (var i=0; i<bodyNum;i++) {
-	    if (bodies[i].x==food.x-UNIT/2 && bodies[i].y==food.y-UNIT/2) {
-	      food.x = UNIT*Math.floor(Math.random()*(CANVAS_WIDTH/UNIT-1))+UNIT*0.5;
+    for (var i=0; i<bodyNum;i++) {
+      if (bodies[i].x==food.x-UNIT/2 && bodies[i].y==food.y-UNIT/2) {
+        food.x = UNIT*Math.floor(Math.random()*(CANVAS_WIDTH/UNIT-1))+UNIT*0.5;
           food.y = UNIT*Math.floor(Math.random()*(CANVAS_HEIGHT/UNIT-1))+UNIT*0.5;
           recheck = true;
-	    }
-	  }
-	}
+      }
+    }
+  }
     got = false;
     console.log("body number:",bodyNum,"score:",score);
   }
@@ -154,14 +155,14 @@ var die = false;
 function checkDie(){
   if (!die) {
     for (var i=0; i<bodyNum;i++) {
-  	  if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
+      if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
           die = true;
           paused = true;
           onLoseAudio.play();
           document.getElementById("game_over").style.display = "block";
           $("canvas").addClass('blur');
           $("#info_container").removeClass('glass');
-    	}
+      }
     }
   }
 }
@@ -189,11 +190,11 @@ function draw() {
   canvas.lineWidth = 4;
   canvas.strokeStyle = 'rgba(41, 98, 255, 0.2)';
   // if (!die){
-  	food.draw();
-  	head.draw();
-  	for (var i=0; i<bodyNum;i++) {
-  	  bodies[i].draw();
-	}
+    food.draw();
+    head.draw();
+    for (var i=0; i<bodyNum;i++) {
+      bodies[i].draw();
+  }
   // } else {
   //   canvas.fillStyle = "#0d47a1";
   //   canvas.fillText("SCORE:"+score, CANVAS_WIDTH/2, CANVAS_HEIGHT/2-10);
@@ -272,18 +273,21 @@ var food = {
 $(document).ready(function(){
   $("#easy").click(function(){
     period = 15;
+    ratio = 10;
     document.getElementById("difficulties").style.display = "none";
     $("canvas").removeClass('blur');
     $("#info_container").removeClass('glass');
   });
   $("#hard").click(function(){
     period = 5;
+    ratio = 30;
     document.getElementById("difficulties").style.display = "none";
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
   });
   $("#insane").click(function(){
     period = 3;
+    ratio = 50;
     document.getElementById("difficulties").style.display = "none";
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
