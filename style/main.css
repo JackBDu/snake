@@ -62,21 +62,23 @@ body {
 }
 div#info_container {
 	text-align: center;
-	height: 360px;
+	height: 480px;
 	width: 480px;
 	display: block;
 	position: absolute;
 	top: 185px;
 	z-index: 9999;
 	border-radius: 10px;
-	/*background: rgba(255, 255, 255, 0.7);*/
+}
+div#info_container. {
+	background: rgba(255, 255, 255, 0.5);
 }
 #game_over {
 	display: none;
-	margin-top: 70px;
+	margin-top: 110px;
 }
 #difficulties {
-	margin-top: 70px;
+	margin-top: 110px;
 }
 .info {
 	padding: 20px 0;
@@ -115,7 +117,7 @@ div#info_container {
 #canvas_container {
     margin: 40px auto;
 	width: 480px;
-	height: 360px;
+	height: 480px;
     border: 5px solid rgba(13, 71, 161, 0.3);
     border-radius: 10px;
 }

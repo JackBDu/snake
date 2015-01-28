@@ -1,6 +1,6 @@
 var UNIT = 30;
 var CANVAS_WIDTH = 16 * UNIT;
-var CANVAS_HEIGHT = 12 * UNIT;
+var CANVAS_HEIGHT = 16 * UNIT;
 var score = 0;
 var bestScore = 0;
 var canvasElement = $("<canvas class='blur' width='" + CANVAS_WIDTH + 
@@ -166,6 +166,7 @@ function checkDie(){
           paused = true;
           document.getElementById("game_over").style.display = "block";
           $("canvas").addClass('blur');
+          $("#info_container").removeClass('glass');
     	}
     }
   }
@@ -209,24 +210,15 @@ function draw() {
 }
 
 var head = {
-//   color: "#000",
+  color: "#1976d2",
   x: UNIT*Math.floor(Math.random()*(CANVAS_WIDTH/UNIT-1))+UNIT*0.5,
   y: UNIT*Math.floor(Math.random()*(CANVAS_HEIGHT/UNIT-1))+UNIT*0.5,
   r: UNIT/2,
   draw: function() {
-    // canvas.fillStyle = this.color;
-    // canvas.beginPath();
-    // canvas.arc(this.x,this.y,this.r, 0,2*Math.PI);
-    // canvas.stroke();
+    canvas.fillStyle = this.color;
     rectX = this.x-UNIT/2;
     rectY = this.y-UNIT/2;
     cornerRadius = 8;
-    // canvas.rect(this.x-UNIT/2,this.y-UNIT/2,UNIT,UNIT);
-    // canvas.stroke();
-    canvas.beginPath();
-    canvas.arc(this.x,this.y,1, 0,2*Math.PI);
-    canvas.stroke();
-
     canvas.beginPath();
     canvas.moveTo(rectX + cornerRadius, rectY);
     canvas.lineTo(rectX + UNIT - cornerRadius, rectY);
@@ -237,6 +229,12 @@ var head = {
     canvas.arcTo(rectX, rectY + UNIT, rectX, rectY + UNIT - cornerRadius, cornerRadius);
     canvas.lineTo(rectX, rectY + cornerRadius);
     canvas.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
+    canvas.fill();
+    canvas.stroke();
+    canvas.fillStyle = '#0d47a1';
+    canvas.beginPath();
+    canvas.arc(this.x, this.y, 3, 0, 2*Math.PI);
+    canvas.fill();
     canvas.stroke();
   }
 };
@@ -248,6 +246,7 @@ function body(tempX,tempY) {
     rectX = this.x;
     rectY = this.y;
     cornerRadius = 8;
+    canvas.fillStyle = '#1976d2';
     canvas.beginPath();
     canvas.moveTo(rectX + cornerRadius, rectY);
     canvas.lineTo(rectX + UNIT - cornerRadius, rectY);
@@ -258,6 +257,7 @@ function body(tempX,tempY) {
     canvas.arcTo(rectX, rectY + UNIT, rectX, rectY + UNIT - cornerRadius, cornerRadius);
     canvas.lineTo(rectX, rectY + cornerRadius);
     canvas.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
+    canvas.fill();
     canvas.stroke();
     // canvas.rect(this.x,this.y,UNIT,UNIT);
     // canvas.stroke();
@@ -265,14 +265,15 @@ function body(tempX,tempY) {
 }
 
 var food = {
-//   color: "#000",
+  color: "#0d47a1",
   x: UNIT*Math.floor(Math.random()*(CANVAS_WIDTH/UNIT-1))+UNIT*0.5,
   y: UNIT*Math.floor(Math.random()*(CANVAS_HEIGHT/UNIT-1))+UNIT*0.5,
   r: UNIT/2,
   draw: function() {
-//     canvas.fillStyle = this.color;
+    canvas.fillStyle = this.color;
     canvas.beginPath();
     canvas.arc(this.x,this.y,this.r, 0,2*Math.PI);
+    canvas.fill();
     canvas.stroke();
   }
 };
@@ -290,15 +291,18 @@ $(document).ready(function(){
     period = 15;
     document.getElementById("difficulties").style.display = "none";
     $("canvas").removeClass('blur');
+    $("#info_container").removeClass('glass');
   });
   $("#hard").click(function(){
     period = 5;
     document.getElementById("difficulties").style.display = "none";
+    $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
   });
   $("#insane").click(function(){
     period = 3;
     document.getElementById("difficulties").style.display = "none";
+    $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
   });
   $("#restart").click(function(){
