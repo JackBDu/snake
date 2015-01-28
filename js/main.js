@@ -173,15 +173,6 @@ function updateScores() {
 
 }
 
-function body(tempX,tempY) {
-  this.x = tempX;
-  this.y = tempY;
-  this.draw = function() {
-    canvas.rect(this.x,this.y,UNIT,UNIT);
-    canvas.stroke();
-  };
-}
-
 // draw
 function draw() {
   canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -208,19 +199,55 @@ var head = {
   y: UNIT*Math.floor(Math.random()*(CANVAS_HEIGHT/UNIT-1))+UNIT*0.5,
   r: UNIT/2,
   draw: function() {
-//     canvas.fillStyle = this.color;
+    // canvas.fillStyle = this.color;
     // canvas.beginPath();
     // canvas.arc(this.x,this.y,this.r, 0,2*Math.PI);
     // canvas.stroke();
-    canvas.rect(this.x-UNIT/2,this.y-UNIT/2,UNIT,UNIT);
-    canvas.stroke();
+    rectX = this.x-UNIT/2;
+    rectY = this.y-UNIT/2;
+    cornerRadius = 8;
+    // canvas.rect(this.x-UNIT/2,this.y-UNIT/2,UNIT,UNIT);
+    // canvas.stroke();
     canvas.beginPath();
     canvas.arc(this.x,this.y,1, 0,2*Math.PI);
+    canvas.stroke();
+
+    canvas.beginPath();
+    canvas.moveTo(rectX + cornerRadius, rectY);
+    canvas.lineTo(rectX + UNIT - cornerRadius, rectY);
+    canvas.arcTo(rectX + UNIT, rectY, rectX + UNIT, rectY + cornerRadius, cornerRadius);
+    canvas.lineTo(rectX + UNIT, rectY + UNIT - cornerRadius);
+    canvas.arcTo(rectX + UNIT, rectY + UNIT, rectX + UNIT - cornerRadius, rectY + UNIT, cornerRadius);
+    canvas.lineTo(rectX + cornerRadius, rectY + UNIT);
+    canvas.arcTo(rectX, rectY + UNIT, rectX, rectY + UNIT - cornerRadius, cornerRadius);
+    canvas.lineTo(rectX, rectY + cornerRadius);
+    canvas.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
     canvas.stroke();
   }
 };
 
-
+function body(tempX,tempY) {
+  this.x = tempX;
+  this.y = tempY;
+  this.draw = function() {
+    rectX = this.x;
+    rectY = this.y;
+    cornerRadius = 8;
+    canvas.beginPath();
+    canvas.moveTo(rectX + cornerRadius, rectY);
+    canvas.lineTo(rectX + UNIT - cornerRadius, rectY);
+    canvas.arcTo(rectX + UNIT, rectY, rectX + UNIT, rectY + cornerRadius, cornerRadius);
+    canvas.lineTo(rectX + UNIT, rectY + UNIT - cornerRadius);
+    canvas.arcTo(rectX + UNIT, rectY + UNIT, rectX + UNIT - cornerRadius, rectY + UNIT, cornerRadius);
+    canvas.lineTo(rectX + cornerRadius, rectY + UNIT);
+    canvas.arcTo(rectX, rectY + UNIT, rectX, rectY + UNIT - cornerRadius, cornerRadius);
+    canvas.lineTo(rectX, rectY + cornerRadius);
+    canvas.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
+    canvas.stroke();
+    // canvas.rect(this.x,this.y,UNIT,UNIT);
+    // canvas.stroke();
+  };
+}
 
 var food = {
 //   color: "#000",
