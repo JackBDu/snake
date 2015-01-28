@@ -27,6 +27,7 @@ var currentDirection;
 var timer = period;
 var bodies = new Array();
 var swipeDirection;
+var ratio = 50;
 function move(){
   $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
@@ -125,7 +126,7 @@ function checkGot() {
   	got = true;
   }
   if (got) {
-    score++;
+    score += ratio;
     onEatAudio.play();
     if (score >= bestScore) {
       bestScore = score;
@@ -272,18 +273,21 @@ var food = {
 $(document).ready(function(){
   $("#easy").click(function(){
     period = 15;
+    ratio = 10;
     document.getElementById("difficulties").style.display = "none";
     $("canvas").removeClass('blur');
     $("#info_container").removeClass('glass');
   });
   $("#hard").click(function(){
     period = 5;
+    ratio = 30;
     document.getElementById("difficulties").style.display = "none";
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
   });
   $("#insane").click(function(){
     period = 3;
+    ratio = 50;
     document.getElementById("difficulties").style.display = "none";
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
