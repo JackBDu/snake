@@ -1,3 +1,5 @@
+var onEatAudio = new Audio('src/onEat.wav');
+var onLoseAudio = new Audio('src/onLose.wav');
 var UNIT = 30;
 var CANVAS_WIDTH = 16 * UNIT;
 var CANVAS_HEIGHT = 16 * UNIT;
@@ -124,6 +126,7 @@ function checkGot() {
   }
   if (got) {
     score++;
+    onEatAudio.play();
     if (score >= bestScore) {
       bestScore = score;
     }
@@ -154,6 +157,7 @@ function checkDie(){
   	  if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
           die = true;
           paused = true;
+          onLoseAudio.play();
           document.getElementById("game_over").style.display = "block";
           $("canvas").addClass('blur');
           $("#info_container").removeClass('glass');
