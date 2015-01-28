@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SNAKE</title>
-    <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-  	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-  	<meta name="HandheldFriendly" content="True">
-  	<meta name="MobileOptimized" content="320">
-  	<meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=0.5, maximum-scale=1, user-scalable=yes">
-   	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js" rel="text/javascript"><\/script>')</script>
-	<script type="text/javascript" src="js/main.js"></script>
-	<script type="text/javascript" src="js/jquery.hotkeys.js"></script>
-	<script type="text/javascript" src="js/key_status.js"></script>
-	<script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-	<style>
-		canvas {
-			border: 1px solid black;
-			display: block;
-			margin: 5px auto;
-		}
-		.buttons {
-			width: 480px;
-			margin: 2px auto;
-		}
-	</style>
-  </head>
+    <head>
+        <title>Snake - the Classic Game</title>
+        <link href="style/main.css" rel="stylesheet" type="text/css">
+        <meta charset="UTF-8">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=0.5, maximum-scale=1, user-scalable=yes">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js" rel="text/javascript"><\/script>')</script>
+        <script type="text/javascript" src="js/main.js"></script>
+        <script type="text/javascript" src="js/jquery.hotkeys.js"></script>
+        <script type="text/javascript" src="js/key_status.js"></script>
+        <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+    </head>
 
-  <body>
-  	<div class="buttons">
- 		<button id="simple">SIMPLE</button>
-		<button id="medium">MEDIUM</button>
-		<button id="hard">HARD</button>
-		<button id="insane">INSANE</button>
-		<button id="crazy">INSANE + CRAZY</button>
-		<button id="restart">RESTART</button>
-	</div>
-	<div class="buttons">
-	 	<button id="increaseWidth">+WIDTH</button>
-		<button id="decreaseWidth">-WIDTH</button>
-		<button id="increaseHeight">+HEIGHT</button>
-		<button id="decreaseHeight">-HEIGHT</button>
-	</div>
-  </body>
+    <body>
+        <div id="content_container">
+            <header>`
+                <h1 id="title">SNAKE</h1>
+                <div id="scores_container">
+                    <div id="score_container">SCORE: <div id="score">0</div></div>
+                    <div id="best_container">BEST: <div id="best"></div></div>
+                </div>
+            </header>
+            <div class="clear_float"></div>
+<!--        <div class="buttons">
+                <button id="increaseWidth">+WIDTH</button>
+                <button id="decreaseWidth">-WIDTH</button>
+                <button id="increaseHeight">+HEIGHT</button>
+                <button id="decreaseHeight">-HEIGHT</button>
+            </div> -->
+            <div id="info_container">
+                <div id="game_over">
+                    <div class="info"><h2>GAME OVER!</h2></div>
+                    <button class="button" id="restart"><h2>RESTART</h2></button>
+                </div>
+                <div id="difficulties">
+                    <div class="info"><h2>DIFFICULTY</h2></div>
+                    <button class="button" id="easy"><h2>!</h2><h2 class="hollow">!!</h2></button>
+                    <button class="button" id="hard"><h2>!!</h2><h2 class="hollow">!</h2></button>
+                    <button class="button" id="insane"><h2>!!!</h2></button>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Copyright &copy 2014-2015 Jack B. Du All rights reserved.</p>
+        </footer>
+    </body>
 
 </html>
