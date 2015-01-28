@@ -19,7 +19,7 @@
 
     <body>
         <div id="content_container">
-            <header>
+            <header>`
                 <h1 id="title">SNAKE</h1>
                 <div id="scores_container">
                     <div id="score_container">SCORE: <div id="score">0</div></div>
@@ -27,19 +27,23 @@
                 </div>
             </header>
             <div class="clear_float"></div>
-            <div class="buttons">
-                <button id="simple">SIMPLE</button>
-                <button id="medium">MEDIUM</button>
-                <button id="hard">HARD</button>
-                <button id="insane">INSANE</button>
-                <button id="crazy">INSANE + CRAZY</button>
-                <button id="restart">RESTART</button>
-            </div>
-            <div class="buttons">
+<!--        <div class="buttons">
                 <button id="increaseWidth">+WIDTH</button>
                 <button id="decreaseWidth">-WIDTH</button>
                 <button id="increaseHeight">+HEIGHT</button>
                 <button id="decreaseHeight">-HEIGHT</button>
+            </div> -->
+            <div id="info_container">
+                <div id="game_over">
+                    <div class="info"><h2>GAME OVER!</h2></div>
+                    <button class="button" id="restart"><h2>RESTART</h2></button>
+                </div>
+                <div id="difficulties">
+                    <div class="info"><h2>DIFFICULTY</h2></div>
+                    <button class="button" id="easy"><h2>!</h2><h2 class="hollow">!!</h2></button>
+                    <button class="button" id="hard"><h2>!!</h2><h2 class="hollow">!</h2></button>
+                    <button class="button" id="insane"><h2>!!!</h2></button>
+                </div>
             </div>
         </div>
         <footer>

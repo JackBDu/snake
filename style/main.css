@@ -60,6 +60,50 @@ body {
 .clear_float {
 	clear: both;
 }
+#info_container {
+	text-align: center;
+	width: 480px;
+	position: absolute;
+	top: 250px;
+	z-index: 9999;
+}
+#game_over {
+	display: none;
+}
+.info {
+	padding: 20px 0;
+	font-size: 40px;
+	color: rgba(21, 101, 192, 0.8);
+}
+.button {
+	font-size: 30px;
+	font-family: 'Exo 2', sans-serif;
+	color: rgba(21, 101, 192, 0.8);
+	padding: 0 10px;
+	margin: 0 10px;
+	border: 5px solid rgba(21, 101, 192, 0.8);
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 15px;
+}
+.button:hover {
+	font-size: 30px;
+	font-family: 'Exo 2', sans-serif;
+	color: rgba(255, 255, 255, 0.8);
+	padding: 0 10px;
+	background: rgba(21, 101, 192, 0.8);
+	border: 5px solid rgba(21, 101, 192, 0.8);
+	border-radius: 15px;
+}
+#info_container .button h2{
+	position: relative;
+	float: left;
+}
+.button .hollow {
+	color: rgba(21, 101, 192, 0.2)
+} 
+.button .hollow:hover {
+	color: rgba(21, 101, 192, 0.8);
+} 
 canvas {
     border: 5px solid rgba(13, 71, 161, 0.3);
     border-radius: 10px;

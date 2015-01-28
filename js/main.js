@@ -7,6 +7,7 @@ var canvasElement = $("<canvas width='" + CANVAS_WIDTH +
                       "' height='" + CANVAS_HEIGHT + "'>Your browser does not support the HTML5 canvas tag.</canvas>");
 var canvas = canvasElement.get(0).getContext("2d");
 var FPS = 30;
+var paused = false;
 $(document).ready(function(){
 	canvasElement.appendTo('#content_container'); // create canvas in body
 	setInterval(function() {
@@ -14,7 +15,8 @@ $(document).ready(function(){
 		draw();
 	}, 1000/FPS); // set FPS 
 });
-var period = 20;
+// var period = 20;
+var period = 3;
 var moveLeft;
 var moveRight;
 var moveUp;
@@ -36,6 +38,7 @@ function move(){
     moveUp = false;
     moveDown = false;
     swipeDirection = "left";
+    paused = false;
   }
   if ((keydown.right || keydown.d || swipeDirection == "right") && (currentDirection != "left" || bodyNum == 0)) {
     moveLeft = false;
@@ -43,6 +46,7 @@ function move(){
     moveUp = false;
     moveDown = false;
     swipeDirection = "right";
+    paused = false;
   }
   if ((keydown.up || keydown.w || swipeDirection == "up") && (currentDirection != "down" || bodyNum == 0)) {
     moveLeft = false;
@@ -50,6 +54,7 @@ function move(){
     moveUp = true;
     moveDown = false;
     swipeDirection = "up";
+    paused = false;
   }
   if ((keydown.down || keydown.s || swipeDirection == "down") && (currentDirection != "up" || bodyNum == 0)) {
     moveLeft = false;
@@ -57,8 +62,11 @@ function move(){
     moveUp = false;
     moveDown = true;
     swipeDirection = "down";
+    paused = false;
   }
-  
+  if (keydown.space) {
+    paused = !paused;
+  }  
 //   bodies[0] = new body(100,100);
 //   for (var i=0; i<bodyNum; i++) {
 //   	function(){bodies[i] = new body();}
@@ -81,18 +89,21 @@ function move(){
   
   	timer = period;
 //   	body(head.x - UNIT/2, head.y - UNIT/2);
-    if (moveLeft) {
-      currentDirection = "left";
-      head.x -= UNIT;
-    } else if (moveRight) {
-      currentDirection = "right";
-      head.x += UNIT;
-    } else if (moveUp) {
-      currentDirection = "up";
-      head.y -= UNIT;
-    } else if (moveDown) {
-      currentDirection = "down";
-      head.y += UNIT;
+
+    if (!paused) {
+      if (moveLeft) {
+        currentDirection = "left";
+        head.x -= UNIT;
+      } else if (moveRight) {
+        currentDirection = "right";
+        head.x += UNIT;
+      } else if (moveUp) {
+        currentDirection = "up";
+        head.y -= UNIT;
+      } else if (moveDown) {
+        currentDirection = "down";
+        head.y += UNIT;
+      }
     }
   }
   timer--;
@@ -152,7 +163,8 @@ function checkDie(){
     for (var i=0; i<bodyNum;i++) {
   	  if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
           die = true;
-          console.log("die");
+          paused = true;
+          document.getElementById("game_over").style.display = "block";
     	}
     }
   }
@@ -160,11 +172,13 @@ function checkDie(){
 
 // update
 function update() {
-  move();
-  edge();
-  checkGot();
+  if (!die) {
+    updateScores();
+    move();
+    edge();
+    checkGot();
+  }
   checkDie();
-  updateScores();
 }
 
 function updateScores() {
@@ -180,17 +194,17 @@ function draw() {
   canvas.strokeStyle = '#0d47a1';
 	// canvas.fillStyle = "#000";
 //	canvas.fillText("Sup Bro!", textX, textY);
-  if (!die){
-	food.draw();
-	head.draw();
-	for (var i=0; i<bodyNum;i++) {
-	  bodies[i].draw();
+  // if (!die){
+  	food.draw();
+  	head.draw();
+  	for (var i=0; i<bodyNum;i++) {
+  	  bodies[i].draw();
 	}
-  } else {
-    canvas.fillStyle = "#0d47a1";
-    canvas.fillText("SCORE:"+score, CANVAS_WIDTH/2, CANVAS_HEIGHT/2-10);
-    canvas.fillText("GAME OVER!", CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
-  }
+  // } else {
+  //   canvas.fillStyle = "#0d47a1";
+  //   canvas.fillText("SCORE:"+score, CANVAS_WIDTH/2, CANVAS_HEIGHT/2-10);
+  //   canvas.fillText("GAME OVER!", CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
+  // }
 }
 
 var head = {
@@ -271,20 +285,17 @@ var food = {
 
 // button controls
 $(document).ready(function(){
-  $("#simple").click(function(){
+  $("#easy").click(function(){
     period = 15;
-  });
-  $("#medium").click(function(){
-    period = 10;
+    document.getElementById("difficulties").style.display = "none";
   });
   $("#hard").click(function(){
     period = 5;
+    document.getElementById("difficulties").style.display = "none";
   });
   $("#insane").click(function(){
     period = 3;
-  });
-  $("#crazy").click(function(){
-    period = 1;
+    document.getElementById("difficulties").style.display = "none";
   });
   $("#restart").click(function(){
     die = false;
@@ -295,6 +306,8 @@ $(document).ready(function(){
     moveLeft = false;
     moveDown = false;
     swipeDirection = " ";
+    document.getElementById("game_over").style.display = "none";
+    document.getElementById("difficulties").style.display = "block";
   });
   $("#increaseWidth").click(function(){
     CANVAS_WIDTH += UNIT*2;
