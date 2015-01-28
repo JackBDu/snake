@@ -29,17 +29,43 @@ body {
     background-image: radial-gradient(ellipse farthest-side at center top, #fff 0%, #90caf9 100%);
 
     color: #0d47a1;
-}
-canvas {
-    border: 1px solid black;
-    border-radius: 10px;
-    display: block;
-    margin: 5px auto;
-    background-color: #fff;
+	font-family: 'Exo 2', sans-serif;
 }
 .buttons {
     width: 480px;
     margin: 0 auto;
+}
+#content_container {
+    width: 480px;
+}
+#title {
+	font-size: 70px;
+	position: relative;
+	float: left;
+	padding-top: 55px;
+}
+#scores_container {
+	font-size: 20px;
+	position: relative;
+	float: right;
+	padding-top: 75px;
+	text-align: right;
+}
+#score, #best {
+	display: inline-block;
+}
+#score_container, #best_container {
+	display: block;
+}
+.clear_float {
+	clear: both;
+}
+canvas {
+    border: 1px solid #0d47a1;
+    border-radius: 10px;
+    display: block;
+    margin: 40px auto;
+    background-color: #fff;
 }
 footer {
     background-color: rgba(255, 255, 255, 0.5);
@@ -54,11 +80,4 @@ footer {
 }
 footer p{
     padding: 6px 0;
-}
-#content_container {
-    width: 480px;
-}
-#title {
-	font-family: 'Exo 2', sans-serif;
-	font-size: 40px;
 }
