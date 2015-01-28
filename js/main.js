@@ -26,7 +26,7 @@ var timer = period;
 var bodies = new Array();
 var swipeDirection;
 function move(){
-  $("canvas").swipe({
+  $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
       swipeDirection = direction;
     }
