@@ -1,3 +1,5 @@
+var onEatAudio = new Audio('src/onEat.wav');
+var onLoseAudio = new Audio('src/onLose.wav');
 var UNIT = 30;
 var CANVAS_WIDTH = 16 * UNIT;
 var CANVAS_HEIGHT = 16 * UNIT;
@@ -124,6 +126,7 @@ function checkGot() {
   }
   if (got) {
     score++;
+    onEatAudio.play();
     if (score >= bestScore) {
       bestScore = score;
     }
@@ -154,6 +157,7 @@ function checkDie(){
   	  if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
           die = true;
           paused = true;
+          onLoseAudio.play();
           document.getElementById("game_over").style.display = "block";
           $("canvas").addClass('blur');
           $("#info_container").removeClass('glass');
@@ -183,7 +187,7 @@ function updateScores() {
 function draw() {
   canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.lineWidth = 4;
-  canvas.strokeStyle = '#0d47a1';
+  canvas.strokeStyle = 'rgba(41, 98, 255, 0.2)';
   // if (!die){
   	food.draw();
   	head.draw();
@@ -198,7 +202,7 @@ function draw() {
 }
 
 var head = {
-  color: "#1976d2",
+  color: "rgba(41, 98, 255, 0.5)",
   x: UNIT*Math.floor(Math.random()*(CANVAS_WIDTH/UNIT-1))+UNIT*0.5,
   y: UNIT*Math.floor(Math.random()*(CANVAS_HEIGHT/UNIT-1))+UNIT*0.5,
   r: UNIT/2,
@@ -218,12 +222,12 @@ var head = {
     canvas.lineTo(rectX, rectY + cornerRadius);
     canvas.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
     canvas.fill();
-    canvas.stroke();
-    canvas.fillStyle = '#0d47a1';
-    canvas.beginPath();
-    canvas.arc(this.x, this.y, 3, 0, 2*Math.PI);
-    canvas.fill();
-    canvas.stroke();
+    // canvas.stroke();
+    // canvas.fillStyle = '#0d47a1';
+    // canvas.beginPath();
+    // canvas.arc(this.x, this.y, 3, 0, 2*Math.PI);
+    // canvas.fill();
+    // canvas.stroke();
   }
 };
 
@@ -234,7 +238,7 @@ function body(tempX,tempY) {
     rectX = this.x;
     rectY = this.y;
     cornerRadius = 8;
-    canvas.fillStyle = '#1976d2';
+    canvas.fillStyle = 'rgba(41, 98, 255, 0.5)';
     canvas.beginPath();
     canvas.moveTo(rectX + cornerRadius, rectY);
     canvas.lineTo(rectX + UNIT - cornerRadius, rectY);
@@ -246,12 +250,12 @@ function body(tempX,tempY) {
     canvas.lineTo(rectX, rectY + cornerRadius);
     canvas.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
     canvas.fill();
-    canvas.stroke();
+    // canvas.stroke();
   };
 }
 
 var food = {
-  color: "#0d47a1",
+  color: "rgba(41, 98, 255, 0.9)",
   x: UNIT*Math.floor(Math.random()*(CANVAS_WIDTH/UNIT-1))+UNIT*0.5,
   y: UNIT*Math.floor(Math.random()*(CANVAS_HEIGHT/UNIT-1))+UNIT*0.5,
   r: UNIT/2,
@@ -260,7 +264,7 @@ var food = {
     canvas.beginPath();
     canvas.arc(this.x,this.y,this.r, 0,2*Math.PI);
     canvas.fill();
-    canvas.stroke();
+    // canvas.stroke();
   }
 };
 
