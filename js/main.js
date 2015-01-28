@@ -26,7 +26,7 @@ var timer = period;
 var bodies = new Array();
 var swipeDirection;
 function move(){
-  $("canvas").swipe({
+  $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
       swipeDirection = direction;
     }
@@ -67,14 +67,6 @@ function move(){
   if (keydown.space) {
     paused = !paused;
   }  
-//   bodies[0] = new body(100,100);
-//   for (var i=0; i<bodyNum; i++) {
-//   	function(){bodies[i] = new body();}
-//   }
-
-//   if (timer==period) {
-// 
-//   }
 
   // move accordingly
   if (timer==0) {
@@ -122,8 +114,6 @@ function edge() {
     head.y -= CANVAS_HEIGHT;
   }
 }
-
-
 
 var recheck;
 var bodyNum = 0;
@@ -194,8 +184,6 @@ function draw() {
   canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   canvas.lineWidth = 4;
   canvas.strokeStyle = '#0d47a1';
-	// canvas.fillStyle = "#000";
-//	canvas.fillText("Sup Bro!", textX, textY);
   // if (!die){
   	food.draw();
   	head.draw();
@@ -259,8 +247,6 @@ function body(tempX,tempY) {
     canvas.arcTo(rectX, rectY, rectX + cornerRadius, rectY, cornerRadius);
     canvas.fill();
     canvas.stroke();
-    // canvas.rect(this.x,this.y,UNIT,UNIT);
-    // canvas.stroke();
   };
 }
 
@@ -277,13 +263,6 @@ var food = {
     canvas.stroke();
   }
 };
-
-// $(document).ready(function(){
-// 	$(this).bind("keydown", "left", function() {
-// 		console.log("keydown+left");
-// 	});
-// });
-
 
 // button controls
 $(document).ready(function(){
@@ -316,22 +295,6 @@ $(document).ready(function(){
     swipeDirection = " ";
     document.getElementById("game_over").style.display = "none";
     document.getElementById("difficulties").style.display = "block";
-  });
-  $("#increaseWidth").click(function(){
-    CANVAS_WIDTH += UNIT*2;
-    $("canvas").attr("width",CANVAS_WIDTH);
-  });
-  $("#decreaseWidth").click(function(){
-    CANVAS_WIDTH -= UNIT*2;
-    $("canvas").attr("width",CANVAS_WIDTH);
-  });
-  $("#increaseHeight").click(function(){
-    CANVAS_HEIGHT += UNIT*2;
-    $("canvas").attr("height",CANVAS_HEIGHT);
-  });
-  $("#decreaseHeight").click(function(){
-    CANVAS_HEIGHT -= UNIT*2;
-    $("canvas").attr("height",CANVAS_HEIGHT);
   });
 });
 
