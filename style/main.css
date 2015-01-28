@@ -16,17 +16,19 @@ html, body {
 }
 body {
     /* IE10 Consumer Preview */ 
-    background-image: -ms-radial-gradient(center top, ellipse farthest-side, #fff 0%, #90caf9 100%);
+    /*background-image: -ms-radial-gradient(center top, ellipse farthest-side, #fff 0%, #82b1ff 100%);*/
     /* Mozilla Firefox */ 
-    background-image: -moz-radial-gradient(center top, ellipse farthest-side, #fff 0%, #90caf9 100%);
+    /*background-image: -moz-radial-gradient(center top, ellipse farthest-side, #fff 0%, #82b1ff 100%);*/
     /* Opera */ 
-    background-image: -o-radial-gradient(center top, ellipse farthest-side, #fff 0%, #90caf9 100%);
+    /*background-image: -o-radial-gradient(center top, ellipse farthest-side, #fff 0%, #82b1ff 100%);*/
     /* Webkit (Safari/Chrome 10) */ 
-    background-image: -webkit-gradient(radial, center top, 0, center top, 477, color-stop(0, #fff), color-stop(1, #90caf9));
+    /*background-image: -webkit-gradient(radial, center top, 0, center top, 477, color-stop(0, #fff), color-stop(1, #82b1ff));*/
     /* Webkit (Chrome 11+) */ 
-    background-image: -webkit-radial-gradient(center top, ellipse farthest-side, #fff 0%, #90caf9 100%);
+    /*background-image: -webkit-radial-gradient(center top, ellipse farthest-side, #fff 0%, #82b1ff 100%);*/
     /* W3C Markup, IE10 Release Preview */ 
-    background-image: radial-gradient(ellipse farthest-side at center top, #fff 0%, #90caf9 100%);
+    /*background-image: radial-gradient(ellipse farthest-side at center top, #fff 0%, #82b1ff 100%);*/
+    /*background-attachment: fixed;*/
+    background: rgba(130, 177, 255, 0.8);
     color: #0d47a1;
 	font-family: 'Exo 2', sans-serif;
 }
@@ -37,6 +39,7 @@ body {
 #content_container {
     width: 490px;
     text-align: center;
+    padding-bottom: 80px;
 }
 #title {
 	font-size: 70px;
@@ -83,16 +86,16 @@ div#info_container. {
 .info {
 	padding: 20px 0;
 	font-size: 40px;
-	color: rgba(21, 101, 192, 0.8);
+	color: rgba(41, 98, 255, 0.8);
 }
 .button {
 	font-size: 30px;
 	font-family: 'Exo 2', sans-serif;
-	color: rgba(21, 101, 192, 0.8);
+	color: rgba(41, 98, 255, 0.8);
 	padding: 0 10px;
 	margin: 0 10px;
-	border: 5px solid rgba(21, 101, 192, 0.8);
-	background: rgba(255, 255, 255, 0.3);
+	/*border: 5px solid rgba(41, 98, 255, 0.8);*/
+	background: rgba(255, 255, 255, 0.5);
 	border-radius: 15px;
 }
 .button:hover {
@@ -100,8 +103,8 @@ div#info_container. {
 	font-family: 'Exo 2', sans-serif;
 	color: rgba(255, 255, 255, 0.8);
 	padding: 0 10px;
-	background: rgba(21, 101, 192, 0.8);
-	border: 5px solid rgba(21, 101, 192, 0.8);
+	background: rgba(41, 98, 255, 0.8);
+	/*border: 5px solid rgba(41, 98, 255, 0.8);*/
 	border-radius: 15px;
 }
 #info_container .button h2{
@@ -109,22 +112,22 @@ div#info_container. {
 	float: left;
 }
 .button .hollow {
-	color: rgba(21, 101, 192, 0.2)
+	color: rgba(41, 98, 255, 0.2)
 } 
 .button .hollow:hover {
-	color: rgba(21, 101, 192, 0.8);
+	color: rgba(41, 98, 255, 0.8);
 } 
 #canvas_container {
     margin: 40px auto;
 	width: 480px;
 	height: 480px;
-    border: 5px solid rgba(13, 71, 161, 0.3);
+    /*border: 5px solid rgba(41, 98, 255, 0.3);*/
     border-radius: 10px;
 }
 canvas {
     border-radius: 10px;
     display: block;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.4);
 }
 canvas.blur {
 	-webkit-filter: blur(5px);
@@ -132,6 +135,20 @@ canvas.blur {
 	-o-filter: blur(5px);
 	-ms-filter: blur(5px);
 	filter: blur(5px);
+}
+div#game-explanation {
+	text-align: justify;
+	font-size: 20px;
+	line-height: 30px;
+}
+div#game-explanation hr {
+	border: 1px solid rgba(13, 71, 161, 0.3);
+	margin: 20px 0px;
+}
+div#game-explanation a {
+	text-decoration: bold;
+	color: #0d47a1;
+	font-weight: bold;
 }
 footer {
     background-color: rgba(255, 255, 255, 0.5);
