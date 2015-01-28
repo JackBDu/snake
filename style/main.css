@@ -6,7 +6,7 @@
 }
 html, body, header, footer, div {
     margin: 0 auto;
-    padding: 0;
+    padding: 0 auto;
     border: 0;
 }
 html, body {
@@ -27,7 +27,6 @@ body {
     background-image: -webkit-radial-gradient(center top, ellipse farthest-side, #fff 0%, #90caf9 100%);
     /* W3C Markup, IE10 Release Preview */ 
     background-image: radial-gradient(ellipse farthest-side at center top, #fff 0%, #90caf9 100%);
-
     color: #0d47a1;
 	font-family: 'Exo 2', sans-serif;
 }
@@ -36,7 +35,8 @@ body {
     margin: 0 auto;
 }
 #content_container {
-    width: 480px;
+    width: 490px;
+    text-align: center;
 }
 #title {
 	font-size: 70px;
@@ -60,15 +60,25 @@ body {
 .clear_float {
 	clear: both;
 }
-#info_container {
+div#info_container {
 	text-align: center;
+	height: 480px;
 	width: 480px;
+	display: block;
 	position: absolute;
-	top: 250px;
+	top: 185px;
 	z-index: 9999;
+	border-radius: 10px;
+}
+div#info_container. {
+	background: rgba(255, 255, 255, 0.5);
 }
 #game_over {
 	display: none;
+	margin-top: 110px;
+}
+#difficulties {
+	margin-top: 110px;
 }
 .info {
 	padding: 20px 0;
@@ -104,12 +114,24 @@ body {
 .button .hollow:hover {
 	color: rgba(21, 101, 192, 0.8);
 } 
-canvas {
+#canvas_container {
+    margin: 40px auto;
+	width: 480px;
+	height: 480px;
     border: 5px solid rgba(13, 71, 161, 0.3);
     border-radius: 10px;
+}
+canvas {
+    border-radius: 10px;
     display: block;
-    margin: 40px auto;
     background-color: rgba(255, 255, 255, 0.2);
+}
+canvas.blur {
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
 }
 footer {
     background-color: rgba(255, 255, 255, 0.5);
