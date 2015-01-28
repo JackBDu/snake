@@ -3,13 +3,13 @@ var CANVAS_WIDTH = 16 * UNIT;
 var CANVAS_HEIGHT = 12 * UNIT;
 var score = 0;
 var bestScore = 0;
-var canvasElement = $("<canvas width='" + CANVAS_WIDTH + 
+var canvasElement = $("<canvas class='blur' width='" + CANVAS_WIDTH + 
                       "' height='" + CANVAS_HEIGHT + "'>Your browser does not support the HTML5 canvas tag.</canvas>");
 var canvas = canvasElement.get(0).getContext("2d");
 var FPS = 30;
 var paused = false;
 $(document).ready(function(){
-	canvasElement.appendTo('#content_container'); // create canvas in body
+	canvasElement.appendTo('#canvas_container'); // create canvas in body
 	setInterval(function() {
 		update();
 		draw();
@@ -165,6 +165,7 @@ function checkDie(){
           die = true;
           paused = true;
           document.getElementById("game_over").style.display = "block";
+          $("canvas").addClass('blur');
     	}
     }
   }
@@ -288,14 +289,17 @@ $(document).ready(function(){
   $("#easy").click(function(){
     period = 15;
     document.getElementById("difficulties").style.display = "none";
+    $("canvas").removeClass('blur');
   });
   $("#hard").click(function(){
     period = 5;
     document.getElementById("difficulties").style.display = "none";
+    $("canvas").removeClass('blur');
   });
   $("#insane").click(function(){
     period = 3;
     document.getElementById("difficulties").style.display = "none";
+    $("canvas").removeClass('blur');
   });
   $("#restart").click(function(){
     die = false;
