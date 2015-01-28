@@ -1,6 +1,6 @@
-var UNIT = 20;
-var CANVAS_WIDTH = 24 * UNIT;
-var CANVAS_HEIGHT = 16 * UNIT;
+var UNIT = 30;
+var CANVAS_WIDTH = 16 * UNIT;
+var CANVAS_HEIGHT = 12 * UNIT;
 var score = 0;
 var bestScore = 0;
 var canvasElement = $("<canvas width='" + CANVAS_WIDTH + 
@@ -185,7 +185,9 @@ function body(tempX,tempY) {
 // draw
 function draw() {
   canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-//	canvas.fillStyle = "#000";
+  canvas.lineWidth = 4;
+  canvas.strokeStyle = '#0d47a1';
+	// canvas.fillStyle = "#000";
 //	canvas.fillText("Sup Bro!", textX, textY);
   if (!die){
 	food.draw();
@@ -194,7 +196,7 @@ function draw() {
 	  bodies[i].draw();
 	}
   } else {
-    canvas.fillStyle = "#000";
+    canvas.fillStyle = "#0d47a1";
     canvas.fillText("SCORE:"+score, CANVAS_WIDTH/2, CANVAS_HEIGHT/2-10);
     canvas.fillText("GAME OVER!", CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
   }
@@ -207,8 +209,10 @@ var head = {
   r: UNIT/2,
   draw: function() {
 //     canvas.fillStyle = this.color;
-    canvas.beginPath();
-    canvas.arc(this.x,this.y,this.r, 0,2*Math.PI);
+    // canvas.beginPath();
+    // canvas.arc(this.x,this.y,this.r, 0,2*Math.PI);
+    // canvas.stroke();
+    canvas.rect(this.x-UNIT/2,this.y-UNIT/2,UNIT,UNIT);
     canvas.stroke();
     canvas.beginPath();
     canvas.arc(this.x,this.y,1, 0,2*Math.PI);

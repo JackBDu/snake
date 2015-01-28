@@ -61,11 +61,11 @@ body {
 	clear: both;
 }
 canvas {
-    border: 1px solid #0d47a1;
+    border: 5px solid rgba(13, 71, 161, 0.3);
     border-radius: 10px;
     display: block;
     margin: 40px auto;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 footer {
     background-color: rgba(255, 255, 255, 0.5);
