@@ -2,12 +2,13 @@ var UNIT = 20;
 var CANVAS_WIDTH = 24 * UNIT;
 var CANVAS_HEIGHT = 16 * UNIT;
 var score = 0;
+var bestScore = 0;
 var canvasElement = $("<canvas width='" + CANVAS_WIDTH + 
                       "' height='" + CANVAS_HEIGHT + "'>Your browser does not support the HTML5 canvas tag.</canvas>");
 var canvas = canvasElement.get(0).getContext("2d");
 var FPS = 30;
 $(document).ready(function(){
-	canvasElement.appendTo('body'); // create canvas in body
+	canvasElement.appendTo('#content_container'); // create canvas in body
 	setInterval(function() {
 		update();
 		draw();
@@ -29,28 +30,28 @@ function move(){
     }
   });
   // check keys
-  if ((keydown.left || swipeDirection == "left") && (currentDirection != "right" || bodyNum == 0)) {
+  if ((keydown.left || keydown.a || swipeDirection == "left") && (currentDirection != "right" || bodyNum == 0)) {
     moveLeft = true;
     moveRight = false;
     moveUp = false;
     moveDown = false;
     swipeDirection = "left";
   }
-  if ((keydown.right || swipeDirection == "right") && (currentDirection != "left" || bodyNum == 0)) {
+  if ((keydown.right || keydown.d || swipeDirection == "right") && (currentDirection != "left" || bodyNum == 0)) {
     moveLeft = false;
     moveRight = true;
     moveUp = false;
     moveDown = false;
     swipeDirection = "right";
   }
-  if ((keydown.up || swipeDirection == "up") && (currentDirection != "down" || bodyNum == 0)) {
+  if ((keydown.up || keydown.w || swipeDirection == "up") && (currentDirection != "down" || bodyNum == 0)) {
     moveLeft = false;
     moveRight = false;
     moveUp = true;
     moveDown = false;
     swipeDirection = "up";
   }
-  if ((keydown.down || swipeDirection == "down") && (currentDirection != "up" || bodyNum == 0)) {
+  if ((keydown.down || keydown.s || swipeDirection == "down") && (currentDirection != "up" || bodyNum == 0)) {
     moveLeft = false;
     moveRight = false;
     moveUp = false;
@@ -122,6 +123,9 @@ function checkGot() {
   }
   if (got) {
     score++;
+    if (score >= bestScore) {
+      bestScore = score;
+    }
     bodyNum++;
     food.x = UNIT*Math.floor(Math.random()*(CANVAS_WIDTH/UNIT-1))+UNIT*0.5;
     food.y = UNIT*Math.floor(Math.random()*(CANVAS_HEIGHT/UNIT-1))+UNIT*0.5;
@@ -146,10 +150,10 @@ var die = false;
 function checkDie(){
   if (!die) {
     for (var i=0; i<bodyNum;i++) {
-	  if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
-        die = true;
-        console.log("die");
-  	  }
+  	  if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
+          die = true;
+          console.log("die");
+    	}
     }
   }
 }
@@ -160,6 +164,13 @@ function update() {
   edge();
   checkGot();
   checkDie();
+  updateScores();
+}
+
+function updateScores() {
+  document.getElementById("score").innerHTML = score;
+  document.getElementById("best").innerHTML = bestScore;
+
 }
 
 function body(tempX,tempY) {
