@@ -74,7 +74,7 @@ function move(){
       swipeDirection = "down";
       paused = false;
     }
-    if (keydown.space && !paused) {
+    if ((keydown.space || swipeDirection == "in" || swipeDirection == "out") && !paused) {
       paused = !paused;
       moveLeft = false;
       moveRight = false;
