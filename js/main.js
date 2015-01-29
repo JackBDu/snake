@@ -29,11 +29,11 @@ var bodies = new Array();
 var swipeDirection;
 var ratio = 50;
 var onGoing = false;
-var touchEvent;
+var fingerNumber;
 function move(){
   $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
-      touchEvent = event;
+      fingerNumber = fingerCount;
       swipeDirection = direction;
     }
   });
@@ -75,7 +75,7 @@ function move(){
       swipeDirection = "down";
       paused = false;
     }
-    if ((keydown.space || touchEvent == "in" || touchEvent == "out" )&& !paused) {
+    if ((keydown.space || fingerNumber == 2)&& !paused) {
       paused = !paused;
       console.log(paused);
       moveLeft = false;
@@ -347,5 +347,7 @@ document.onkeydown = function(evt) {
     var keyCode = evt.keyCode;
     if (keyCode >= 37 && keyCode <= 40 || keyCode == 32) {
         return false;
+    }
+};false;
     }
 };
