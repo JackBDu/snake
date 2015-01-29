@@ -80,6 +80,10 @@ div#info_container.glass {
 	display: none;
 	margin-top: 115px;
 }
+#pause {
+	display: none;
+	margin-top: 115px;
+}
 #difficulties {
 	margin-top: 115px;
 }

@@ -29,15 +29,18 @@ var bodies = new Array();
 var swipeDirection;
 var ratio = 50;
 var onGoing = false;
+var touchEvent;
 function move(){
   $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
+      touchEvent = event;
       swipeDirection = direction;
     }
   });
   // check keys
   if (onGoing) {
     if ((keydown.left || keydown.a || swipeDirection == "left") && (currentDirection != "right" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = true;
       moveRight = false;
       moveUp = false;
@@ -46,6 +49,7 @@ function move(){
       paused = false;
     }
     if ((keydown.right || keydown.d || swipeDirection == "right") && (currentDirection != "left" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = false;
       moveRight = true;
       moveUp = false;
@@ -54,6 +58,7 @@ function move(){
       paused = false;
     }
     if ((keydown.up || keydown.w || swipeDirection == "up") && (currentDirection != "down" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = false;
       moveRight = false;
       moveUp = true;
@@ -62,6 +67,7 @@ function move(){
       paused = false;
     }
     if ((keydown.down || keydown.s || swipeDirection == "down") && (currentDirection != "up" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = false;
       moveRight = false;
       moveUp = false;
@@ -69,11 +75,22 @@ function move(){
       swipeDirection = "down";
       paused = false;
     }
-    if (keydown.space) {
+    if ((keydown.space || touchEvent == "in" || touchEvent == "out" )&& !paused) {
       paused = !paused;
+      console.log(paused);
+      moveLeft = false;
+      moveRight = false;
+      moveUp = false;
+      moveDown = false;
+      swipeDirection = null;
+      $("canvas").addClass('blur');
+      document.getElementById("pause").style.display = "block";
     }  
   }
 
+  if (paused) {
+    timer = period;
+  }
   // move accordingly
   if (timer==0) {
       for (var i=bodyNum; i>0;i--) {
@@ -150,7 +167,6 @@ function checkGot() {
     }
   }
     got = false;
-    console.log("body number:",bodyNum,"score:",score);
   }
 }
 
@@ -307,6 +323,10 @@ $(document).ready(function(){
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
   });
+  $("#resume").click(function(){
+    document.getElementById("pause").style.display = "none";
+    $("canvas").removeClass('blur');
+  });
   $("#restart").click(function(){
     die = false;
     bodyNum = 0;
@@ -325,7 +345,7 @@ $(document).ready(function(){
 document.onkeydown = function(evt) {
     evt = evt || window.event;
     var keyCode = evt.keyCode;
-    if (keyCode >= 37 && keyCode <= 40) {
+    if (keyCode >= 37 && keyCode <= 40 || keyCode == 32) {
         return false;
     }
 };
