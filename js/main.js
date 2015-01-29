@@ -29,9 +29,11 @@ var bodies = new Array();
 var swipeDirection;
 var ratio = 50;
 var onGoing = false;
+var touchEvent;
 function move(){
   $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
+      touchEvent = event;
       swipeDirection = direction;
     }
   });
@@ -73,7 +75,7 @@ function move(){
       swipeDirection = "down";
       paused = false;
     }
-    if (keydown.space && !paused) {
+    if ((keydown.space || touchEvent == "in" || touchEvent == "out" )&& !paused) {
       paused = !paused;
       console.log(paused);
       moveLeft = false;
@@ -82,6 +84,7 @@ function move(){
       moveDown = false;
       swipeDirection = null;
       $("canvas").addClass('blur');
+      document.getElementById("pause").style.display = "block";
     }  
   }
 
@@ -164,7 +167,6 @@ function checkGot() {
     }
   }
     got = false;
-    console.log("body number:",bodyNum,"score:",score);
   }
 }
 
@@ -319,6 +321,10 @@ $(document).ready(function(){
     onGoing = true;
     document.getElementById("difficulties").style.display = "none";
     $("#info_container").removeClass('glass');
+    $("canvas").removeClass('blur');
+  });
+  $("#resume").click(function(){
+    document.getElementById("pause").style.display = "none";
     $("canvas").removeClass('blur');
   });
   $("#restart").click(function(){
