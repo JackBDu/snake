@@ -9,7 +9,7 @@ var canvasElement = $("<canvas class='blur' width='" + CANVAS_WIDTH +
                       "' height='" + CANVAS_HEIGHT + "'>Your browser does not support the HTML5 canvas tag.</canvas>");
 var canvas = canvasElement.get(0).getContext("2d");
 var FPS = 30;
-var paused = false;
+var paused = true;
 $(document).ready(function(){
   canvasElement.appendTo('#canvas_container'); // create canvas in body
   setInterval(function() {
@@ -329,6 +329,20 @@ $(document).ready(function(){
     document.getElementById("pause").style.display = "none";
     $("canvas").removeClass('blur');
   });
+  $("#force_pause").click(function(){
+    console.log("check");
+    if (!paused) {
+      paused = !paused;
+      moveLeft = false;
+      moveRight = false;
+      moveUp = false;
+      moveDown = false;
+      swipeDirection = null;
+      $("canvas").addClass('blur');
+      $("#info_container").addClass('glass');
+      document.getElementById("pause").style.display = "block";
+    }
+  });
   $("#restart").click(function(){
     die = false;
     bodyNum = 0;
@@ -340,6 +354,19 @@ $(document).ready(function(){
     swipeDirection = " ";
     document.getElementById("game_over").style.display = "none";
     document.getElementById("difficulties").style.display = "block";
+  });
+  $("#restart2").click(function(){
+    die = false;
+    bodyNum = 0;
+    score = 0;
+    moveUp = false;
+    moveDown = false;
+    moveLeft = false;
+    moveDown = false;
+    swipeDirection = " ";
+    document.getElementById("game_over").style.display = "none";
+    document.getElementById("difficulties").style.display = "block";
+    document.getElementById("pause").style.display = "none";
   });
   $("#force_restart").click(function(){
     console.log("clicked");
