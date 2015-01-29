@@ -29,6 +29,7 @@ var bodies = new Array();
 var swipeDirection;
 var ratio = 50;
 var onGoing = false;
+var result = "NEW BEST!";
 function move(){
   $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
@@ -75,7 +76,6 @@ function move(){
     }
     if (keydown.space && !paused) {
       paused = !paused;
-      console.log(paused);
       moveLeft = false;
       moveRight = false;
       moveUp = false;
@@ -146,7 +146,9 @@ function checkGot() {
   if (got) {
     score += ratio;
     onEatAudio.play();
+    result = "FAILED!";
     if (score >= bestScore) {
+      result = "NEW BEST!";
       bestScore = score;
     }
     bodyNum++;
@@ -199,7 +201,8 @@ function update() {
 function updateScores() {
   document.getElementById("score").innerHTML = score;
   document.getElementById("best").innerHTML = bestScore;
-
+  document.getElementById("final_score").innerHTML = score;
+  document.getElementById("result").innerHTML = result;
 }
 
 // draw
