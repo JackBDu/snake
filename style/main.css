@@ -32,10 +32,6 @@ body {
     color: #0d47a1;
 	font-family: 'Exo 2', sans-serif;
 }
-.buttons {
-    width: 480px;
-    margin: 0 auto;
-}
 #content_container {
     width: 490px;
     text-align: center;
@@ -75,6 +71,11 @@ div#info_container {
 }
 div#info_container.glass {
 	background: rgba(255, 255, 255, 0.1);
+}
+#static_restart {
+	position: absolute;
+	top: -105px;
+	right: 100px;
 }
 #game_over {
 	display: none;
