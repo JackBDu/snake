@@ -299,6 +299,14 @@ $(document).ready(function(){
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
   });
+  $("#crazy").click(function(){
+    period = 1;
+    ratio = 150;
+    onGoing = true;
+    document.getElementById("difficulties").style.display = "none";
+    $("#info_container").removeClass('glass');
+    $("canvas").removeClass('blur');
+  });
   $("#restart").click(function(){
     die = false;
     bodyNum = 0;
