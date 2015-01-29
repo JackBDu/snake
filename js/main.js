@@ -28,6 +28,7 @@ var timer = period;
 var bodies = new Array();
 var swipeDirection;
 var ratio = 50;
+var onGoing = false;
 function move(){
   $("body").swipe({
     swipe:function(event, direction, distance, duration, fingerCount) {
@@ -35,41 +36,43 @@ function move(){
     }
   });
   // check keys
-  if ((keydown.left || keydown.a || swipeDirection == "left") && (currentDirection != "right" || bodyNum == 0)) {
-    moveLeft = true;
-    moveRight = false;
-    moveUp = false;
-    moveDown = false;
-    swipeDirection = "left";
-    paused = false;
+  if (onGoing) {
+    if ((keydown.left || keydown.a || swipeDirection == "left") && (currentDirection != "right" || bodyNum == 0)) {
+      moveLeft = true;
+      moveRight = false;
+      moveUp = false;
+      moveDown = false;
+      swipeDirection = "left";
+      paused = false;
+    }
+    if ((keydown.right || keydown.d || swipeDirection == "right") && (currentDirection != "left" || bodyNum == 0)) {
+      moveLeft = false;
+      moveRight = true;
+      moveUp = false;
+      moveDown = false;
+      swipeDirection = "right";
+      paused = false;
+    }
+    if ((keydown.up || keydown.w || swipeDirection == "up") && (currentDirection != "down" || bodyNum == 0)) {
+      moveLeft = false;
+      moveRight = false;
+      moveUp = true;
+      moveDown = false;
+      swipeDirection = "up";
+      paused = false;
+    }
+    if ((keydown.down || keydown.s || swipeDirection == "down") && (currentDirection != "up" || bodyNum == 0)) {
+      moveLeft = false;
+      moveRight = false;
+      moveUp = false;
+      moveDown = true;
+      swipeDirection = "down";
+      paused = false;
+    }
+    if (keydown.space) {
+      paused = !paused;
+    }  
   }
-  if ((keydown.right || keydown.d || swipeDirection == "right") && (currentDirection != "left" || bodyNum == 0)) {
-    moveLeft = false;
-    moveRight = true;
-    moveUp = false;
-    moveDown = false;
-    swipeDirection = "right";
-    paused = false;
-  }
-  if ((keydown.up || keydown.w || swipeDirection == "up") && (currentDirection != "down" || bodyNum == 0)) {
-    moveLeft = false;
-    moveRight = false;
-    moveUp = true;
-    moveDown = false;
-    swipeDirection = "up";
-    paused = false;
-  }
-  if ((keydown.down || keydown.s || swipeDirection == "down") && (currentDirection != "up" || bodyNum == 0)) {
-    moveLeft = false;
-    moveRight = false;
-    moveUp = false;
-    moveDown = true;
-    swipeDirection = "down";
-    paused = false;
-  }
-  if (keydown.space) {
-    paused = !paused;
-  }  
 
   // move accordingly
   if (timer==0) {
@@ -158,6 +161,7 @@ function checkDie(){
       if (bodies[i].x==head.x-UNIT/2 && bodies[i].y==head.y-UNIT/2) {
           die = true;
           paused = true;
+          onGoing = false;
           onLoseAudio.play();
           document.getElementById("game_over").style.display = "block";
           $("canvas").addClass('blur');
@@ -274,6 +278,7 @@ $(document).ready(function(){
   $("#easy").click(function(){
     period = 15;
     ratio = 10;
+    onGoing = true;
     document.getElementById("difficulties").style.display = "none";
     $("canvas").removeClass('blur');
     $("#info_container").removeClass('glass');
@@ -281,6 +286,7 @@ $(document).ready(function(){
   $("#hard").click(function(){
     period = 5;
     ratio = 30;
+    onGoing = true;
     document.getElementById("difficulties").style.display = "none";
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
@@ -288,6 +294,7 @@ $(document).ready(function(){
   $("#insane").click(function(){
     period = 3;
     ratio = 50;
+    onGoing = true;
     document.getElementById("difficulties").style.display = "none";
     $("#info_container").removeClass('glass');
     $("canvas").removeClass('blur');
