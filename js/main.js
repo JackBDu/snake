@@ -38,6 +38,7 @@ function move(){
   // check keys
   if (onGoing) {
     if ((keydown.left || keydown.a || swipeDirection == "left") && (currentDirection != "right" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = true;
       moveRight = false;
       moveUp = false;
@@ -46,6 +47,7 @@ function move(){
       paused = false;
     }
     if ((keydown.right || keydown.d || swipeDirection == "right") && (currentDirection != "left" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = false;
       moveRight = true;
       moveUp = false;
@@ -54,6 +56,7 @@ function move(){
       paused = false;
     }
     if ((keydown.up || keydown.w || swipeDirection == "up") && (currentDirection != "down" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = false;
       moveRight = false;
       moveUp = true;
@@ -62,6 +65,7 @@ function move(){
       paused = false;
     }
     if ((keydown.down || keydown.s || swipeDirection == "down") && (currentDirection != "up" || bodyNum == 0)) {
+      $("canvas").removeClass('blur');
       moveLeft = false;
       moveRight = false;
       moveUp = false;
@@ -69,11 +73,21 @@ function move(){
       swipeDirection = "down";
       paused = false;
     }
-    if (keydown.space) {
+    if (keydown.space && !paused) {
       paused = !paused;
+      console.log(paused);
+      moveLeft = false;
+      moveRight = false;
+      moveUp = false;
+      moveDown = false;
+      swipeDirection = null;
+      $("canvas").addClass('blur');
     }  
   }
 
+  if (paused) {
+    timer = period;
+  }
   // move accordingly
   if (timer==0) {
       for (var i=bodyNum; i>0;i--) {
