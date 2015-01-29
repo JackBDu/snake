@@ -348,6 +348,4 @@ document.onkeydown = function(evt) {
     if (keyCode >= 37 && keyCode <= 40 || keyCode == 32) {
         return false;
     }
-};false;
-    }
 };
