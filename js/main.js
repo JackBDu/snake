@@ -9,7 +9,7 @@ var canvasElement = $("<canvas class='blur' width='" + CANVAS_WIDTH +
                       "' height='" + CANVAS_HEIGHT + "'>Your browser does not support the HTML5 canvas tag.</canvas>");
 var canvas = canvasElement.get(0).getContext("2d");
 var FPS = 30;
-var paused = false;
+var paused = true;
 $(document).ready(function(){
   canvasElement.appendTo('#canvas_container'); // create canvas in body
   setInterval(function() {
