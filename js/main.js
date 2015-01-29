@@ -82,6 +82,7 @@ function move(){
       moveDown = false;
       swipeDirection = null;
       $("canvas").addClass('blur');
+      $("#info_container").addClass('glass');
       document.getElementById("pause").style.display = "block";
     }  
   }
@@ -181,7 +182,7 @@ function checkDie(){
           onLoseAudio.play();
           document.getElementById("game_over").style.display = "block";
           $("canvas").addClass('blur');
-          $("#info_container").removeClass('glass');
+          $("#info_container").addClass('glass');
       }
     }
   }
@@ -339,6 +340,22 @@ $(document).ready(function(){
     swipeDirection = " ";
     document.getElementById("game_over").style.display = "none";
     document.getElementById("difficulties").style.display = "block";
+  });
+  $("#force_restart").click(function(){
+    console.log("clicked");
+    paused = true;
+    die = false;
+    bodyNum = 0;
+    score = 0;
+    moveUp = false;
+    moveDown = false;
+    moveLeft = false;
+    moveDown = false;
+    swipeDirection = " ";
+    document.getElementById("game_over").style.display = "none";
+    document.getElementById("difficulties").style.display = "block";
+    $("canvas").addClass('blur');
+    $("#info_container").addClass('glass');
   });
 });
 
