@@ -72,10 +72,13 @@ div#info_container {
 div#info_container.glass {
 	background: rgba(255, 255, 255, 0.1);
 }
-#static_restart {
+#static_pause {
 	position: absolute;
 	top: -105px;
-	right: 100px;
+	right: 120px;
+}
+button {
+	outline: 0;
 }
 #game_over {
 	display: none;
