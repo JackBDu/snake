@@ -386,7 +386,7 @@ $(document).ready(function(){
   });
 });
 
-// prevent scrolling with arrow keys
+// prevent scrolling with arrow keys and space bar
 document.onkeydown = function(evt) {
     evt = evt || window.event;
     var keyCode = evt.keyCode;
