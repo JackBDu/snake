@@ -1,6 +1,6 @@
-# SNAKE
+# Snake
 
-A remake of the classic game Snake, built from scratch.
+A remake of the classic game Snake, built from scratch, written in JavaScript.
 
 [Play it here!](http://jackbdu.github.io/snake)
 
@@ -13,4 +13,4 @@ This project was originally built for Developing Web at NYU Shanghai. It was the
 
 ## License
 
-SNAKE is licensed under the [Apache license](https://github.com/JackBDu/snake/blob/gh-pages/LICENSE).
+SNAKE is licensed under the [Apache license](./LICENSE).
